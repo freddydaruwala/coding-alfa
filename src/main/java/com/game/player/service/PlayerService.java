@@ -5,9 +5,10 @@ import com.game.player.exception.PlayerNotFoundException;
 import com.game.player.repository.PlayerRepository;
 import com.game.player.resource.PlayerResource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-
+@Service
 public class PlayerService {
 
     @Autowired
@@ -16,7 +17,7 @@ public class PlayerService {
     public PlayerResource player(Long id) {
         Optional<Player> player =  playerRepository.findById(id);
         Player p = player.orElseThrow(() -> {throw new PlayerNotFoundException("player not found!!");});
-
+        
         PlayerResource resource = PlayerResource.builder()
                 .email(p.getEmail())
                 .firstName(p.getFirstName())
